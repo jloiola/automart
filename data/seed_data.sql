@@ -1,0 +1,11 @@
+insert into make (id, name) values (475,'Acura');
+insert into make (id, name) values (474,'Honda');
+insert into make (id, name) values (480,'Infiniti');
+insert into make (id, name) values (542,'Isuzu');
+insert into make (id, name) values (515,'Lexus');
+insert into make (id, name) values (473,'Mazda');
+insert into make (id, name) values (481,'Mitsubishi');
+insert into make (id, name) values (478,'Nissan');
+insert into make (id, name) values (523,'Subaru');
+insert into make (id, name) values (509,'Suzuki');
+insert into make (id, name) values (448,'Toyota');

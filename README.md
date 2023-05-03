@@ -1,8 +1,13 @@
 # Automart
 
-E-commerce platform for parts.
+E-commerce platform.
 
-## Getting started
+## Code Challenge
+
+https://vpic.nhtsa.dot.gov/api/vehicles/getmakesformanufacturerandyear/988?year=2014&format=json
+https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/aston%20martin?format=json
+
+### Getting started
 
 Its assumed you have python>=3.10 installed via your favorite package or version manager.
 

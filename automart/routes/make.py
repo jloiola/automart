@@ -1,5 +1,6 @@
 from typing import List
 from fastapi import APIRouter
+from automart.lib.nhtsa import get_make_models
 from automart.lib.schemas import (
     Make,
     MakeView,
@@ -48,7 +49,10 @@ async def get_models(make_id: int):
 @router.get(
     "/{make_id}/models",
 )
-async def get_make_models(make_id: int):
-    queryset = Model.filter(make_id=make_id)
-    make_models = await queryset.prefetch_related("make")
-    return make_models
+async def fetch_make_models(make_id: int):
+    make = await Make.get(id=make_id)
+    if not make:
+        return
+
+    models = await get_make_models(make.name)
+    return models

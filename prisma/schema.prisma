@@ -1,0 +1,36 @@
+datasource db {
+    provider = "sqlite"
+    url      = "file:automart.db"
+}
+
+generator client {
+    provider             = "prisma-client-py"
+    interface            = "asyncio"
+    recursive_type_depth = 5
+}
+
+model Customer {
+    id         Int      @id @default(autoincrement())
+    name       String
+    created_at DateTime @default(now())
+    updated_at DateTime @updatedAt
+
+    @@map(name: "customers")
+}
+
+model Make {
+    id    Int     @id
+    name  String
+    Model Model[]
+
+    @@map(name: "makes")
+}
+
+model Model {
+    id     Int    @id
+    name   String
+    make   Make   @relation(fields: [makeId], references: [id])
+    makeId Int
+
+    @@map(name: "models")
+}

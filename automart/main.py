@@ -1,26 +1,25 @@
-from pathlib import Path
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
-from tortoise.contrib.fastapi import register_tortoise
 from automart.routes import *
+from automart.lib.prisma import db
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        await db.connect()
+        yield
+    finally:
+        await db.disconnect()
+
 
 # init app
-app = FastAPI(title="Automart")
+app = FastAPI(
+    title="Automart",
+    lifespan=lifespan,
+)
 
-# register routes
 
 prefix = "/api/v1"
 app.include_router(customer.router, prefix=prefix)
 app.include_router(make.router, prefix=prefix)
-
-
-# setup db
-parent_path = Path().parent
-db_path = parent_path / "tmp" / "db.sql"
-
-register_tortoise(
-    app,
-    db_url=f"sqlite://{db_path}",
-    modules={"models": ["automart.lib.models"]},
-    generate_schemas=True,
-    add_exception_handlers=True,
-)

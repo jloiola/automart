@@ -1,16 +1,19 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from automart.lib.db import db
+from automart.models import *
 from automart.routes import *
-from automart.lib.prisma import db
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    try:
-        await db.connect()
-        yield
-    finally:
-        await db.disconnect()
+    db.connect()
+
+    with db:
+        db.create_tables([Customer, Make, Model])
+
+    yield
+    db.close()
 
 
 # init app

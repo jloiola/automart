@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Response
 from automart.models import Customer
-from automart.schemas import CustomerCreate, CustomerView
+from automart.schemas import CustomerCreate, CustomerView, CustomerUpdate
+from datetime import datetime
 
 router = APIRouter(
     prefix="/customer",
@@ -15,9 +16,9 @@ async def get_customers():
     return customers
 
 
-@router.post("/", response_model=None)
-async def create_customer(customer_create: CustomerCreate):
-    customer = Customer.create(**customer_create.dict())
+@router.post("/", response_model=CustomerView)
+async def create_customer(body: CustomerCreate):
+    customer = Customer.create(**body.dict())
 
     if not customer:
         raise HTTPException(status_code=400)
@@ -25,7 +26,7 @@ async def create_customer(customer_create: CustomerCreate):
     return CustomerView.from_orm(customer)
 
 
-@router.get("/{customer_id}", response_model=None)
+@router.get("/{customer_id}", response_model=CustomerView)
 async def get_customer(customer_id: int):
     customer = Customer.select().where(Customer.id == customer_id).limit(1)
 
@@ -36,6 +37,19 @@ async def get_customer(customer_id: int):
 
 
 # TODO implement a `update_customer` endpoint
+@router.put("/{customer_id}", response_model=None)
+async def update_customer(customer_id: int, body: CustomerUpdate):
+    update_count = (
+        Customer.update(**body.dict(), modified_at=datetime.utcnow())
+        .where(Customer.id == customer_id)
+        .execute()
+    )
+
+    if not update_count:
+        raise HTTPException(status_code=400)
+
+    customer = Customer.get_by_id(customer_id)
+    return CustomerView.from_orm(customer)
 
 
 @router.delete(
@@ -46,6 +60,6 @@ async def delete_customer(customer_id: int):
     deleted_count = Customer.delete_by_id(customer_id)
 
     if not deleted_count:
-        raise HTTPException(status_code=404, detail=f"Customer {customer_id} not found")
+        raise HTTPException(status_code=404)
 
     return Response(status_code=200)

@@ -1,1 +1,1 @@
-from automart.routes import customer, make
+from automart.routes import customer, make, model

@@ -22,7 +22,7 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-
 prefix = "/api/v1"
 app.include_router(customer.router, prefix=prefix)
 app.include_router(make.router, prefix=prefix)
+app.include_router(model.router, prefix=prefix)

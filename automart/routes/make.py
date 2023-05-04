@@ -28,23 +28,6 @@ async def get_make(make_id: int):
 
 @router.get("/{make_id}/models", response_model=list[ModelView])
 async def get_make_models(make_id: int):
-    make = Make.get_by_id(make_id)
-
-    if not make:
-        raise HTTPException(status_code=404)
-
-    make = MakeView.from_orm(make)
-    response = await fetch_make_models(make.name)
-    results = [
-        ModelView(make=make, name=result["Model_Name"], id=result["Model_ID"])
-        for result in response["Results"]
-    ]
-
-    return results
-
-
-@router.get("/{make_id}/models-api", response_model=list[ModelView])
-async def get_make_models_api(make_id: int):
     query = Model.select().where(Make.id == make_id).join(Make)
     makes = [ModelView.from_orm(makes) for makes in query]
     return makes

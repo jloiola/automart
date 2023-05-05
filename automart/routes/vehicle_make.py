@@ -11,7 +11,7 @@ router = APIRouter(
 
 @router.get("/", response_model=list[VehicleMakeView])
 async def get_vehicle_makes(page: int = 0, perPage: int = 25):
-    query = VehicleMake.select().paginate(page, perPage)
+    query = VehicleMake.select().limit(perPage).offset(page * perPage)
     vehicle_makes = [VehicleMakeView.from_orm(vehicle_makes) for vehicle_makes in query]
     return vehicle_makes
 

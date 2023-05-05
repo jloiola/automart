@@ -11,7 +11,7 @@ router = APIRouter(
 
 @router.get("/", response_model=list[VehicleModelView])
 async def get_vehicle_models(page: int = 0, perPage: int = 25):
-    query = VehicleModel.select().paginate(page, perPage)
+    query = VehicleModel.select().limit(perPage).offset(page * perPage)
     vehicle_models = [
         VehicleModelView.from_orm(vehicle_models) for vehicle_models in query
     ]

@@ -11,7 +11,7 @@ router = APIRouter(
 
 @router.get("/", response_model=list[CustomerView])
 async def get_customers(page: int = 0, perPage: int = 25):
-    query = Customer.select().paginate(page, perPage)
+    query = Customer.select().limit(perPage).offset(page * perPage)
     customers = [CustomerView.from_orm(customer) for customer in query]
     return customers
 

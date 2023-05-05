@@ -34,4 +34,4 @@ PYTHONPATH=$(pwd) python data/setup_db.py
 
 Open API docs should be available at http://localhost:9000/docs
 
-![Alt OpenAPI Screenshot](/docs/open-api-screenshot.png?raw=true "OpenAPI Screenshot")
+![Alt OpenAPI Screenshot](docs/open-api-screenshot.png?raw=true "OpenAPI Screenshot")

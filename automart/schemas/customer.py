@@ -1,5 +1,4 @@
 from datetime import datetime
-from pydantic import Field
 from automart.schemas.base import BaseSchema
 
 

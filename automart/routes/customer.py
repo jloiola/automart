@@ -10,8 +10,8 @@ router = APIRouter(
 
 
 @router.get("/", response_model=list[CustomerView])
-async def get_customers():
-    query = Customer.select()
+async def get_customers(page: int = 0, perPage: int = 25):
+    query = Customer.select().paginate(page, perPage)
     customers = [CustomerView.from_orm(customer) for customer in query]
     return customers
 
@@ -28,12 +28,12 @@ async def create_customer(body: CustomerCreate):
 
 @router.get("/{customer_id}", response_model=CustomerView)
 async def get_customer(customer_id: int):
-    customer = Customer.select().where(Customer.id == customer_id).limit(1)
+    customer = Customer.get_by_id(customer_id)
 
     if not customer:
         raise HTTPException(status_code=400)
 
-    return CustomerView.from_orm(customer[0])
+    return CustomerView.from_orm(customer)
 
 
 # TODO implement a `update_customer` endpoint

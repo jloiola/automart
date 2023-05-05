@@ -1,6 +1,6 @@
 from automart.schemas.base import BaseSchema
 
 
-class MakeView(BaseSchema):
+class VehicleMakeView(BaseSchema):
     id: int
     name: str

@@ -10,7 +10,7 @@ async def lifespan(app: FastAPI):
     db.connect()
 
     with db:
-        db.create_tables([Customer, Make, Model])
+        db.create_tables([Customer, VehicleMake, VehicleModel])
 
     yield
     db.close()
@@ -24,5 +24,5 @@ app = FastAPI(
 
 prefix = "/api/v1"
 app.include_router(customer.router, prefix=prefix)
-app.include_router(make.router, prefix=prefix)
-app.include_router(model.router, prefix=prefix)
+app.include_router(vehicle_make.router, prefix=prefix)
+app.include_router(vehicle_model.router, prefix=prefix)

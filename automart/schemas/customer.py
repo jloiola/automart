@@ -16,5 +16,3 @@ class CustomerView(BaseSchema):
     id: int
     first_name: str
     last_name: str
-    created_at: datetime
-    modified_at: datetime

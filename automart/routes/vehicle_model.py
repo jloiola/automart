@@ -26,6 +26,3 @@ async def get_vehicle_model(vehicle_model_id: int):
         raise HTTPException(status_code=404)
 
     return VehicleModelView.from_orm(vehicle_model)
-
-
-# TODO implement sync models

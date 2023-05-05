@@ -1,7 +1,6 @@
 from fastapi import APIRouter, HTTPException, Response
 from automart.models import Customer
-from automart.schemas import CustomerCreate, CustomerView, CustomerUpdate
-from datetime import datetime
+from automart.schemas import CustomerCreate, CustomerView
 
 router = APIRouter(
     prefix="/customer",
@@ -36,20 +35,7 @@ async def get_customer(customer_id: int):
     return CustomerView.from_orm(customer)
 
 
-# TODO implement a `update_customer` endpoint
-@router.put("/{customer_id}", response_model=None)
-async def update_customer(customer_id: int, body: CustomerUpdate):
-    update_count = (
-        Customer.update(**body.dict(), modified_at=datetime.utcnow())
-        .where(Customer.id == customer_id)
-        .execute()
-    )
-
-    if not update_count:
-        raise HTTPException(status_code=400)
-
-    customer = Customer.get_by_id(customer_id)
-    return CustomerView.from_orm(customer)
+# TODO implement an `update_customer` endpoint
 
 
 @router.delete(

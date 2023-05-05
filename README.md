@@ -1,11 +1,6 @@
 # Automart
 
-E-commerce platform.
-
 ## Code Challenge
-
-https://vpic.nhtsa.dot.gov/api/vehicles/getmakesformanufacturerandyear/988?year=2014&format=json
-https://vpic.nhtsa.dot.gov/api/vehicles/getmodelsformake/aston%20martin?format=json
 
 ### Getting started
 
@@ -19,13 +14,10 @@ python -V
 pip install -r requirements.txt
 
 # seed db data
-```bash
 PYTHONPATH=$(pwd) python data/setup_db.py
-```
 
 # start the app
-```bash
 ./start
 ```
 
-Open API should be available at http://localhost:9000
+Open API docs should be available at http://localhost:9000/docs

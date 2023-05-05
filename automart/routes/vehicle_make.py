@@ -23,7 +23,7 @@ async def get_vehicle_make(vehicle_make_id: int):
     if not vehicle_make:
         raise HTTPException(status_code=404)
 
-    return VehicleMakeView.from_orm(vehicle_make[0])
+    return VehicleMakeView.from_orm(vehicle_make)
 
 
 @router.get("/{make_id}/models", response_model=list[VehicleModelView])

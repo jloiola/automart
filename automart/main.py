@@ -8,10 +8,6 @@ from automart.routes import *
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     db.connect()
-
-    with db:
-        db.create_tables([Customer, VehicleMake, VehicleModel])
-
     yield
     db.close()
 

@@ -18,8 +18,14 @@ python -V
 # install depedencies
 pip install -r requirements.txt
 
-# start the app or optionally change
-# PORT=6000 ./start
-./start
-
+# seed db data
+```bash
+PYTHONPATH=$(pwd) python data/setup_db.py
 ```
+
+# start the app
+```bash
+./start
+```
+
+Open API should be available at http://localhost:9000

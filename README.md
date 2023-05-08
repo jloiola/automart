@@ -2,6 +2,10 @@
 
 ## User stories
 
+There are two user stories provided below. Please review each and implement them in the app.
+
+As you might with a ticket for a real application, please explain any assumptions you may have made, any points of confusion etc if applicable. Feel free to include these notes directly under the stories in the "Dev Comments" section.
+
 ### Task #1: Add Endpoint to Update Customer Info
 
 Currently, we can query for all customers, query for a specific customer by ID, create a customer, or delete a customer by ID.
@@ -12,7 +16,10 @@ Add an endpoint that allows for an existing customer record to be updated. The e
 
 - The endpoint allows for the updating of the customer's first name and last name. Both fields can be updated in one request, but both don't have to be specified.
 - The API considers possible errors and edge cases, and raises errors with appropriate HTTP status codes.
-- TODO: add prompt for explanation. Include any assumptions, points of confusion etc
+
+**Dev Comments:**
+
+...
 
 ### Task #2: Add Functionality to Keep Our Vehicle Data up to Date
 
@@ -30,6 +37,10 @@ Additionally, we want to be able to trigger this process via an endpoint in our 
 - The API considers possible errors and edge cases, and raises errors with appropriate HTTP status codes.
 - The process only updates model data for makes that we currently have listed in our database.
 - The process must account for the future addition of more makes to our database.
+
+**Dev Comments:**
+
+...
 
 **Notes/Tips on NHTSA API Usage**
 

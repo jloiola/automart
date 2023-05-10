@@ -1,5 +1,7 @@
 # Automart Code Challenge
 
+This repo contains part of a simple api for a fictional Japanese autoparts store. This api needs to keep track of customers, as well as vehicle makes and models, which it gets from a 3rd party API.
+
 ## User stories
 
 There are two user stories provided below. Please review each and implement them in the app.
@@ -8,9 +10,7 @@ As you might with a ticket for a real application, please explain any assumption
 
 ### Task #1: Add Endpoint to Update Customer Info
 
-Currently, we can query for all customers, query for a specific customer by ID, create a customer, or delete a customer by ID.
-
-Add an endpoint that allows for an existing customer record to be updated. The endpoint should primarily be built for a customer info form in the UI that will be built in the future.
+Add an endpoint that allows for updating customer records.
 
 **Acceptance Criteria:**
 
@@ -21,21 +21,22 @@ Add an endpoint that allows for an existing customer record to be updated. The e
 
 ...
 
+
 ### Task #2: Add Functionality to Keep Our Vehicle Data up to Date
 
-We store vehicle data in our db for the vehicle makes that we sell parts for. We want to make sure that our `vehicle_model` table always stays in sync with what those manufacturers are producing.
+Vehicle makes the store supports are stored in the database. The models these manufactures produce should be stored in the database as well, but must be kept in sync as manufactures add or discontinue models.
 
-Use the [NHTSA API](https://vpic.nhtsa.dot.gov/api/) to fetch the latest data about the makes we service and create, update, and/or delete their associated models accordingly in our database.
+Use the [NHTSA API](https://vpic.nhtsa.dot.gov/api/) to fetch the latest data about the makes and create, update, and/or delete their associated models accordingly in the database.
 
-Additionally, we want to be able to trigger this process via an endpoint in our API. Hitting the endpoint should trigger the process mentioned above to sync the model data in our database with the data provided by the NHTSA.
+Create an endpoint that triggers this fetching and sync process.
 
 **Acceptance Criteria:**
 
 - Sending a request to the endpoint starts the process to update the model data stored in our database with the latest data on vehicle models pulled from the NHTSA.
 - The API endpoint returns a JSON object containing a list of the makes that were updated.
-- Assuming that the number of makes and models we support could grow quite large, the endpoint should consider best practices for slow running processes in an API. FastAPI's [Background Tasks](https://fastapi.tiangolo.com/tutorial/background-tasks/?h=backg#background-tasks) could be one way to handle this, but note, there is no one right answer for this. Use your best judgement.
+- Assuming that the number of makes and models continues to grow, the endpoint should consider best practices for slow running processes in an API. FastAPI's [Background Tasks](https://fastapi.tiangolo.com/tutorial/background-tasks/?h=backg#background-tasks) could be one way to handle this, but note, there is no one right answer for this. Use your best judgement.
 - The API considers possible errors and edge cases, and raises errors with appropriate HTTP status codes.
-- The process only updates model data for makes that we currently have listed in our database.
+- The process only updates model data for makes that are currently listed in our database.
 - The process must account for the future addition of more makes to our database.
 
 **Dev Comments:**
